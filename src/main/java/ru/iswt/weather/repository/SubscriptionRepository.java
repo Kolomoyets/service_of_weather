@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
 
-    List<Subscription> findByCustomer(String customer);
+    List<Subscription> findByCustomerAndCountryAndCityAndFrequency(String customer, String country, String city, int frequency);
+
+    boolean existsByCustomerAndCountryAndCityAndFrequency(String customer, String country, String city, int frequency);
+
+    boolean existsByCountryAndCity(String country, String city);
+
 }

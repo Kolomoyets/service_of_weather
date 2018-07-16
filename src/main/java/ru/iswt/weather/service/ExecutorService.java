@@ -1,6 +1,5 @@
 package ru.iswt.weather.service;
 
-import org.springframework.stereotype.Service;
 import ru.iswt.weather.model.Subscription;
 
 import java.util.List;
@@ -8,9 +7,9 @@ import java.util.List;
 
 public interface ExecutorService {
 
-    void registration(Subscription entity);
+    boolean registration(Subscription entity);
 
-    void unRegistration(Subscription entity);
+    boolean unRegistration(Subscription entity);
 
     long count();
 

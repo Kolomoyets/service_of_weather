@@ -18,6 +18,9 @@ public class Subscription {
     private String country;
     private int frequency;
 
+    //Последняя погода
+    private String lastWeather;
+
     public Subscription() {
 
     }
@@ -28,15 +31,6 @@ public class Subscription {
         this.frequency = frequency;
     }
 
-    @Override
-    public String toString() {
-        return "Subscription{" +
-                "id=" + id +
-                ", customer='" + customer + '\'' +
-                ", city='" + city + '\'' +
-                ", frequency=" + frequency +
-                '}';
-    }
 
     public String getCustomer() {
         return customer;
@@ -76,6 +70,26 @@ public class Subscription {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLastWeather() {
+        return lastWeather;
+    }
+
+    public void setLastWeather(String lastWeather) {
+        this.lastWeather = lastWeather;
+    }
+
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "id=" + id +
+                ", customer='" + customer + '\'' +
+                ", email='" + email + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", frequency=" + frequency +
+                '}';
     }
 }
 

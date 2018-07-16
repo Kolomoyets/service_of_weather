@@ -30,12 +30,8 @@ public class Application {
     public CommandLineRunner commandLineRunner() {
         return args -> {
             service.init();
-
-            System.out.println("Load \"Weather Service\" ");
-            //  repository.save(new Subscription("Иванов", "Москва", 3600));
-            //   repository.save(new Subscription("Петров", "Санкт-Петербург", 3600));
-            long count = service.count();
-            log.info("Количество данных в БД=", count);
+            log.info("Загрузка \"Weather Service\"");
+            log.info("Количество данных в БД=" + service.count());
         };
     }
 

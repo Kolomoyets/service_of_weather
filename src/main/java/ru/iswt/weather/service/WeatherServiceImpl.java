@@ -1,9 +1,10 @@
 package ru.iswt.weather.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.iswt.weather.model.Forecast;
-import ru.iswt.weather.model.Subscription;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -26,13 +27,14 @@ import java.util.Map;
 @Service("weatherService")
 public class WeatherServiceImpl implements WeatherService {
     final private static String APPID = "a797e6e45fa264fca6747a6e2697df70";
+    private static final Logger LOG = LoggerFactory.getLogger(ExecutorServiceImpl.class);
 
     @Override
-    public List<Forecast> load(Subscription subscription) {
-        String s = getWeather(subscription.getCity(), subscription.getCountry());
-        List<Forecast> list = getObjectData(s);
-        return list;
+    public List<Forecast> load(String country, String city) throws Exception{
+        String s = getWeather(country, city);
+        return getObjectData(s);
     }
+
 
     private List<Forecast> getObjectData(String jsonInString) {
         ObjectMapper mapper = new ObjectMapper();
@@ -70,15 +72,10 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
 
-    private String getWeather(String city, String country) {
+    private String getWeather(String country, String city) throws Exception {
         String url = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "," + country + "&units=metric&appid=" + APPID;
         Map<String, String> map = new HashMap<>();
-        String res = null;
-        try {
-            res = executeRequest("GET", url, map, null);
-        } catch (UnrecoverableKeyException | CertificateException | NoSuchAlgorithmException | KeyStoreException | IOException | KeyManagementException e) {
-            e.printStackTrace();
-        }
+        String res = executeRequest("GET", url, map, null);
         return res;
     }
 

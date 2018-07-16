@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 public class WeatherController {
 
-
     @Autowired
     ExecutorService service;
 
@@ -34,7 +33,19 @@ public class WeatherController {
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity registration(@RequestBody Subscription entity) {
-        service.registration(entity);
-        return new ResponseEntity(HttpStatus.OK);
+        if (service.registration(entity)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @RequestMapping(value = "/unreg", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity unRegistration(@RequestBody Subscription entity) {
+        if (service.unRegistration(entity)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
     }
 }

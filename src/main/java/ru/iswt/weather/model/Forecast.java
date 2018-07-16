@@ -7,9 +7,12 @@ public class Forecast {
     private String description;
     private Date date;
 
-
     public Double getTemp() {
         return temp;
+    }
+
+    public String getWeather() {
+        return temp + "," + description;
     }
 
     public void setTemp(Double temp) {
